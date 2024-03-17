@@ -1,23 +1,11 @@
-import { FC, useMemo } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { FC } from 'react'
 import { Combobox } from '@/components/Combobox'
 import { WorkingGroup, workingGroups } from './lead.types'
 import { useLeadStore } from './lead.store'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { graphql } from '@/gql'
 import request from 'graphql-request'
 import { QN_URL } from '@/config'
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
-import { useSettingsStore } from '@/components/Settings'
-import { formatNumber, asJoyPerTerm } from '@/lib/utils'
 import { WorkersCard } from '@/pages/Lead/WorkersCard'
 import { SetSalaryCard } from '@/pages/Lead/SetSalaryCard'
 
@@ -66,10 +54,10 @@ export const LeadPage: FC = () => {
   })
 
   return (
-    <main className="mx-auto max-w-[1200px] mt-[50px]">
-      <div className="scroll-m-20 border-b pb-2 flex justify-between items-center mb-8">
-        <h2 className="text-3xl font-semibold tracking-tight first:mt-0">
-          Manage working group
+    <>
+      <div className="scroll-m-20 pb-2 flex justify-between items-center mb-8">
+        <h2 className="text-3xl text-white font-semibold tracking-tight first:mt-0">
+          Working group
         </h2>
         <Combobox
           options={workingGroupsOptions}
@@ -85,6 +73,6 @@ export const LeadPage: FC = () => {
           workersQuery={workersQuery}
         />
       </div>
-    </main>
+    </>
   )
 }

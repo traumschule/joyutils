@@ -21,7 +21,7 @@ export const useSettingsStore = create<
     immer((set) => ({
       isSettingsOpen: false,
       joyUsdRate: 0.022,
-      termLength: 216001,
+      termLength: 403200,
       setSettingsOpen: (isOpen: boolean) => {
         set((state) => {
           state.isSettingsOpen = isOpen

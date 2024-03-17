@@ -12,6 +12,7 @@ export type JoyCardProps = PropsWithChildren<{
   description?: string
   isLoading?: boolean
   isError?: boolean
+  contentClassName?: string
 }>
 
 export const JoyCard: FC<JoyCardProps> = ({
@@ -19,6 +20,7 @@ export const JoyCard: FC<JoyCardProps> = ({
   description,
   isLoading,
   isError,
+  contentClassName,
   children,
 }) => {
   const content = isLoading ? 'Loading' : isError ? 'Error' : children
@@ -29,7 +31,7 @@ export const JoyCard: FC<JoyCardProps> = ({
         <CardTitle>{title}</CardTitle>
         {description ? <CardDescription>{description}</CardDescription> : null}
       </CardHeader>
-      <CardContent>{content}</CardContent>
+      <CardContent className={contentClassName}>{content}</CardContent>
     </Card>
   )
 }

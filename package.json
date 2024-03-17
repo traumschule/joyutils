@@ -11,8 +11,9 @@
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.18",
     "@hookform/resolvers": "^3.3.4",
-    "@joystream/types": "^2.1.0",
+    "@joystream/types": "^4.4.0",
     "@polkadot-onboard/core": "^1.1.0",
     "@polkadot-onboard/injected-wallets": "^1.1.0",
     "@polkadot-onboard/react": "^1.1.0",
@@ -23,6 +24,7 @@
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-popover": "^1.0.7",
     "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-tooltip": "^1.0.7",
     "@tanstack/react-query": "^5.24.6",
     "@walletconnect/modal": "^2.6.2",
     "@walletconnect/universal-provider": "^2.11.2",
@@ -34,10 +36,12 @@
     "graphql-request": "^5.2.0",
     "immer": "^10.0.3",
     "lucide-react": "^0.344.0",
+    "luxon": "^3.4.4",
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.0",
+    "react-router-dom": "^6.22.3",
     "sonner": "^1.4.3",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
@@ -46,7 +50,9 @@
   },
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.2",
+    "@graphql-codegen/client-preset": "4.2.4",
     "@parcel/watcher": "^2.4.1",
+    "@types/luxon": "^3.4.2",
     "@types/node": "^20.11.24",
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",
@@ -58,18 +64,6 @@
     "prettier": "^3.2.5",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3",
-    "vite": "^5.1.4",
-    "@graphql-codegen/client-preset": "4.2.4"
-  },
-  "resolutions": {
-    "@polkadot/api": "8.9.1",
-    "@polkadot/keyring": "9.5.1",
-    "@polkadot/types": "8.9.1",
-    "@polkadot/util": "9.5.1",
-    "@polkadot/util-crypto": "9.5.1",
-    "@polkadot/networks": "9.5.1",
-    "@polkadot/x-fetch": "9.5.1",
-    "@polkadot/x-global": "9.5.1",
-    "@polkadot/x-ws": "9.5.1"
+    "vite": "^5.1.4"
   }
 }

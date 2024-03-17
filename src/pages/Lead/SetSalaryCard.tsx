@@ -1,9 +1,7 @@
 import { FC, useEffect, useMemo, useState } from 'react'
 import { GetWorkersQuery } from '@/gql/graphql'
 import { asJoyPerTerm, formatNumber, joyToHapi } from '@/lib/utils'
-import { useLeadStore } from '@/pages/Lead/lead.store'
 import { useSettingsStore } from '@/components/Settings'
-import { BN } from 'bn.js'
 import { WorkingGroup, workingGroups } from './lead.types'
 import { JoyCard } from '@/components/JoyCard'
 import { UseQueryResult } from '@tanstack/react-query'
@@ -14,7 +12,6 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
   Form,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -113,18 +110,26 @@ export const SetSalaryCard: FC<SetSalaryCardProps> = ({
       toast.error('Missing lead role key')
       return
     }
-    //         .signAndSend(senderAddress, { signer: wallet.signer }, () => {
-    //           // do something with result
-    //         });
-    await api.tx[group]
-      .updateRewardAmount(data.workerId, hapiPerBlock.toString())
-      .signAndSend(leadRoleKey, { signer: wallet.signer }, (result) => {
-        console.log(result)
-      })
+
+    try {
+      await api.tx[group]
+        .updateRewardAmount(data.workerId, hapiPerBlock.toString())
+        .signAndSend(leadRoleKey, { signer: wallet.signer }, (result) => {
+          console.log(result)
+        })
+    } catch (e) {
+      console.error(e)
+      //e.message === 'Cancelled'
+      toast.error('Failed to set salary')
+    }
+
+    // invalidate workers query
+    // workersQuery.invalidate()
   }
 
   const usdSalary = form.watch('usdSalary')
-  const joyPerTerm = usdSalary != null ? usdSalary / joyUsdRate : null
+  const joyPerTerm =
+    usdSalary != null && !isNaN(usdSalary) ? usdSalary / joyUsdRate : null
   const joyPerBlock = joyPerTerm != null ? joyPerTerm / termLength : null
 
   return (
@@ -165,8 +170,15 @@ export const SetSalaryCard: FC<SetSalaryCardProps> = ({
                   <Input
                     type="number"
                     {...field}
-                    value={field.value ?? ''}
-                    onChange={(e) => field.onChange(+e.target.value)}
+                    value={
+                      field.value == null || isNaN(field.value)
+                        ? ''
+                        : field.value
+                    }
+                    onChange={({ target: { valueAsNumber } }) =>
+                      field.onChange(valueAsNumber)
+                    }
+                    className="text-sm h-10"
                   />
                   <FormMessage />
                 </FormItem>

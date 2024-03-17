@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { decodeAddress, encodeAddress } from '@polkadot/util-crypto'
+import { u8aToHex } from '@polkadot/util'
 import { JOYSTREAM_SS58_PREFIX } from '@/config'
 import { useSettingsStore } from '@/components/Settings'
 import { formatUnits, parseUnits } from 'ethers'
@@ -15,6 +16,7 @@ export const formatJoystreamAddress = (address: string) => {
 }
 
 export function hapiToJoy(hapi: string | bigint) {
+  console.log('hapiToJoy', hapi)
   const asBigint = BigInt(hapi)
   return Number(formatUnits(asBigint, 10))
 }
