@@ -125,17 +125,15 @@ export const TopNav: FC = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="hidden md:block">
-                    <div className="ml-4 flex gap-x-3 items-center md:ml-6">
-                      {walletNode}
-                      <Button
-                        variant="nav"
-                        size="icon"
-                        onClick={() => setSettingsOpen(true)}
-                      >
-                        <Settings className="h-6 w-6" />
-                      </Button>
-                    </div>
+                  <div className="ml-auto flex gap-x-3 items-center md:ml-6 mr-3 md:mr-0">
+                    {walletNode}
+                    <Button
+                      variant="nav"
+                      size="icon"
+                      onClick={() => setSettingsOpen(true)}
+                    >
+                      <Settings className="h-6 w-6" />
+                    </Button>
                   </div>
                   <div className="-mr-2 flex md:hidden">
                     {/* Mobile menu button */}

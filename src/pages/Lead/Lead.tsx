@@ -66,7 +66,7 @@ export const LeadPage: FC = () => {
           itemName="working group"
         />
       </div>
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
         <WorkersCard group={selectedWorkingGroup} workersQuery={workersQuery} />
         <SetSalaryCard
           group={selectedWorkingGroup}
