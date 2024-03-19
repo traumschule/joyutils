@@ -3,6 +3,7 @@ import { JoyHapiCard } from '@/pages/General/JoyHapiCard'
 import { DurationCard } from '@/pages/General/DurationCard'
 import { DateCard } from '@/pages/General/DateCard'
 import { VideoFeesCard } from '@/pages/General/VideoFeesCard'
+import { BlockTimeCard } from '@/pages/General/BlockTimeCard'
 
 export const GeneralPage: FC = () => {
   return (
@@ -15,6 +16,7 @@ export const GeneralPage: FC = () => {
         <DurationCard />
         <DateCard />
         <VideoFeesCard />
+        <BlockTimeCard />
       </div>
     </>
   )

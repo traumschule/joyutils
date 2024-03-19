@@ -4,6 +4,7 @@ import {
   createContext,
   FC,
   PropsWithChildren,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -12,8 +13,14 @@ import { RPC_URL } from '../../config'
 
 type ApiContextType = {
   api: ApiPromise | null
+  apiAt: (
+    blockNumber: number
+  ) => Promise<Awaited<ReturnType<ApiPromise['at']>> | null>
 }
-export const ApiContext = createContext<ApiContextType>({ api: null })
+export const ApiContext = createContext<ApiContextType>({
+  api: null,
+  apiAt: async () => null,
+})
 
 export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
   const [api, setApi] = useState<ApiPromise | null>(null)
@@ -29,7 +36,18 @@ export const ApiProvider: FC<PropsWithChildren> = ({ children }) => {
     setupApi()
   }, [])
 
-  return <ApiContext.Provider value={{ api }}>{children}</ApiContext.Provider>
+  const apiAt = useCallback(
+    async (blockNumber: number) => {
+      if (!api) return null
+      const hash = await api.rpc.chain.getBlockHash(blockNumber)
+      return await api.at(hash)
+    },
+    [api]
+  )
+
+  return (
+    <ApiContext.Provider value={{ api, apiAt }}>{children}</ApiContext.Provider>
+  )
 }
 
 export const useApiContext = () => {
