@@ -58,7 +58,7 @@ export const TopNav: FC = () => {
             <Wallet />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
+        <DropdownMenuContent align="end">
           <DropdownMenuLabel>
             Connected to {wallet?.metadata.title}
           </DropdownMenuLabel>
