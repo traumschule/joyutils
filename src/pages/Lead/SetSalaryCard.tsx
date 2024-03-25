@@ -21,6 +21,7 @@ import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 import { useApiContext } from '@/providers/api'
 import { useJoystreamWallets } from '@/providers/wallet'
+import { useTransactionContext } from '@/providers/transaction'
 
 type SetSalaryCardProps = {
   group: WorkingGroup
@@ -48,6 +49,8 @@ export const SetSalaryCard: FC<SetSalaryCardProps> = ({
   })
 
   const { api } = useApiContext()
+
+  const { setTxForConfirmation } = useTransactionContext()
 
   const workerOptions = useMemo(
     () =>
@@ -111,17 +114,10 @@ export const SetSalaryCard: FC<SetSalaryCardProps> = ({
       return
     }
 
-    try {
-      await api.tx[group]
-        .updateRewardAmount(data.workerId, hapiPerBlock.toString())
-        .signAndSend(leadRoleKey, { signer: wallet.signer }, (result) => {
-          console.log(result)
-        })
-    } catch (e) {
-      console.error(e)
-      //e.message === 'Cancelled'
-      toast.error('Failed to set salary')
-    }
+    setTxForConfirmation(
+      api.tx[group].updateRewardAmount(data.workerId, hapiPerBlock.toString()),
+      leadRoleKey
+    )
 
     // invalidate workers query
     // workersQuery.invalidate()

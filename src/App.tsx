@@ -10,6 +10,7 @@ import { GeneralPage } from '@/pages/General/General'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import { FC } from 'react'
+import { TransactionProvider } from '@/providers/transaction'
 
 const queryClient = new QueryClient()
 
@@ -50,8 +51,10 @@ const App = () => {
       <WalletProvider>
         <QueryClientProvider client={queryClient}>
           <TooltipProvider delayDuration={300}>
-            <RouterProvider router={router} />
-            <Toaster />
+            <TransactionProvider>
+              <RouterProvider router={router} />
+              <Toaster />
+            </TransactionProvider>
           </TooltipProvider>
         </QueryClientProvider>
       </WalletProvider>

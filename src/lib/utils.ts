@@ -16,7 +16,6 @@ export const formatJoystreamAddress = (address: string) => {
 }
 
 export function hapiToJoy(hapi: string | bigint) {
-  console.log('hapiToJoy', hapi)
   const asBigint = BigInt(hapi)
   return Number(formatUnits(asBigint, 10))
 }
