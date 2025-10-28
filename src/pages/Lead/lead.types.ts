@@ -1,4 +1,5 @@
 export const workingGroups = {
+  appWorkingGroup: 'Apps',
   operationsWorkingGroupAlpha: 'Builders',
   operationsWorkingGroupBeta: 'HR',
   operationsWorkingGroupGamma: 'Marketing',
