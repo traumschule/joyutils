@@ -1,3 +1,4 @@
+import { sidecarUrl } from '../../config'
 import { FC, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { hapiToJoy } from '@/lib/utils'
@@ -13,15 +14,9 @@ type VideoFees = {
 async function getVideoFees(): Promise<VideoFees> {
   try {
     const responses = await Promise.all([
-      fetch(
-        'https://monitoring.joyutils.org/sidecar/pallets/storage/storage/DataObjectStateBloatBondValue'
-      ),
-      fetch(
-        'https://monitoring.joyutils.org/sidecar/pallets/storage/storage/DataObjectPerMegabyteFee'
-      ),
-      fetch(
-        'https://monitoring.joyutils.org/sidecar/pallets/content/storage/VideoStateBloatBondValue'
-      ),
+      fetch(sidecarUrl + 'pallets/storage/storage/DataObjectStateBloatBondValue'),
+      fetch(sidecarUrl + 'pallets/storage/storage/DataObjectPerMegabyteFee'),
+      fetch(sidecarUrl + 'pallets/content/storage/VideoStateBloatBondValue'),
     ])
     if (!responses.every((response) => response.ok)) {
       throw new Error('Bad response')

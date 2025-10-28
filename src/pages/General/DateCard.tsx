@@ -1,3 +1,4 @@
+import { sidecarUrl } from '../../config'
 import { FC, useState } from 'react'
 import { JoyCard } from '@/components/JoyCard'
 import { JoyInput } from '@/components/JoyInput'
@@ -18,9 +19,7 @@ const REFERENCE_FALLBACK: Reference = {
 
 async function getLatestBlock(): Promise<Reference> {
   try {
-    const response = await fetch(
-      'https://monitoring.joyutils.org/sidecar/blocks/head'
-    )
+    const response = await fetch(sidecarUrl + 'blocks/head' )
     if (!response.ok) {
       throw new Error('Bad response')
     }
