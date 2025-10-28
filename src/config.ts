@@ -1,6 +1,7 @@
 export const RPC_URL = 'wss://rpc.joyutils.org'
 export const QN_URL = 'https://query.joyutils.org/graphql'
 export const sidecarUrl = 'https://joyutils.org/sidecar/'
+export const JOYUSDRATE = 0.0005
 
 // export const RPC_URL = 'wss://65.108.208.60.nip.io/ws-rpc'
 // export const QN_URL = 'https://65.108.208.60.nip.io/query-node/server/graphql'

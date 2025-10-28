@@ -1,3 +1,4 @@
+import { JOYUSDRATE } from '../../config'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { immer } from 'zustand/middleware/immer'
@@ -20,7 +21,7 @@ export const useSettingsStore = create<
   persist(
     immer((set) => ({
       isSettingsOpen: false,
-      joyUsdRate: 0.022,
+      joyUsdRate: JOYUSDRATE,
       termLength: 403200,
       setSettingsOpen: (isOpen: boolean) => {
         set((state) => {
